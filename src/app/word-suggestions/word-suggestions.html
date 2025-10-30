@@ -15,8 +15,9 @@
             <label for="numberOfSuggestions">Nombre de suggestions :</label>
             <input type="number" id="numberOfSuggestions" name="numberOfSuggestions" [(ngModel)]="numberOfSuggestions" min="1" required />
         </div>
-
-        <button type="submit" class="button" [disabled]="!wordForm.form.valid">Obtenir des suggestions</button>
+        <div class="buttons">
+            <button type="submit" class="button" [disabled]="!wordForm.form.valid">Obtenir des suggestions</button>
+        </div>
     </form>
 
     <div *ngIf="suggestions.length > 0" class="results-container">
