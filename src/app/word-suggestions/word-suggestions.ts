@@ -16,8 +16,9 @@ export class WordSuggestions {
 
   constructor(private wordSuggestionsService: WordSuggestionsService) {}
 
-  protected term: string = '';
-  protected choicesInput: string = '';
+  // Added defaults props data
+  protected term: string = 'gros';
+  protected choicesInput: string = 'gross,grass,glass,grasp,grist,grace,grape,group,grove,groan';
   protected numberOfSuggestions: number = 5;
   protected suggestions: WordCandidate[] = [];
 
