@@ -1,0 +1,27 @@
+<form (ngSubmit)="onSubmit()" #wordForm="ngForm">
+    <div>
+        <label for="term">Enter a word:</label>
+        <input type="text" id="term" name="term" [(ngModel)]="term" required />
+    </div>
+    
+    <div>
+        <label for="choices">Enter choices (comma separated):</label>
+        <input type="text" id="choices" name="choices" [(ngModel)]="choicesInput" required />
+    </div>
+    
+    <div>
+        <label for="numberOfSuggestions">Number of suggestions:</label>
+        <input type="number" id="numberOfSuggestions" name="numberOfSuggestions" [(ngModel)]="numberOfSuggestions" min="1" required />
+    </div>
+    
+    <button type="submit" [disabled]="!wordForm.form.valid">Get Suggestions</button>
+</form>
+
+<div *ngIf="suggestions.length > 0">
+    <h3>Suggestions:</h3>
+    <ul>
+        <li *ngFor="let suggestion of suggestions">
+            {{ suggestion.value }} (Différences: {{ suggestion.diff }})
+        </li>
+    </ul>
+</div>
