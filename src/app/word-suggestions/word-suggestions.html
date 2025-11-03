@@ -1,31 +1,75 @@
-<div class="suggestions-container">
-    <h1 class="title">Suggestions de mots</h1>
-    <form (ngSubmit)="onSubmit()" #wordForm="ngForm" class="form-container">
-        <div class="input-field">
-            <label for="term">Entrez le mot :</label>
-            <input type="text" id="term" name="term" [(ngModel)]="term" required />
-        </div>
+<section class="word-suggestions">
+    <div class="word-suggestions__inner">
+        <header class="word-suggestions__header">
+            <p class="word-suggestions__eyebrow">Assistant linguistique</p>
+            <h1>Suggestions de mots</h1>
+            <p class="word-suggestions__subtitle">
+                Affinez votre vocabulaire en comparant rapidement un mot à une liste de choix et obtenez les meilleures correspondances.
+            </p>
+        </header>
 
-        <div class="input-field">
-            <label for="choices">Entrez les choix (séparés par des virgules) :</label>
-            <input type="text" id="choices" name="choices" [(ngModel)]="choicesInput" required />
-        </div>
+        <form
+            (ngSubmit)="onSubmit()"
+            #wordForm="ngForm"
+            class="word-suggestions__form"
+            novalidate
+        >
+            <div class="form-grid">
+                <div class="form-field">
+                    <label for="term">Mot de référence</label>
+                    <input
+                        type="text"
+                        id="term"
+                        name="term"
+                        [(ngModel)]="term"
+                        required
+                        placeholder="Ex. innovation"
+                        autocomplete="off"
+                    />
+                </div>
 
-        <div class="input-field">
-            <label for="numberOfSuggestions">Nombre de suggestions :</label>
-            <input type="number" id="numberOfSuggestions" name="numberOfSuggestions" [(ngModel)]="numberOfSuggestions" min="1" required />
-        </div>
-        <div class="buttons">
-            <button type="submit" class="button" [disabled]="!wordForm.form.valid">Obtenir des suggestions</button>
-        </div>
-    </form>
+                <div class="form-field">
+                    <label for="choices">Choix possibles</label>
+                    <input
+                        type="text"
+                        id="choices"
+                        name="choices"
+                        [(ngModel)]="choicesInput"
+                        required
+                        placeholder="Séparez chaque mot par une virgule"
+                        autocomplete="off"
+                    />
+                </div>
 
-    <div *ngIf="suggestions.length > 0" class="results-container">
-        <h3>Suggestions :</h3>
-        <ul class="suggestions-list">
-            <li *ngFor="let suggestion of suggestions">
-                {{ suggestion.value }} (Différences : {{ suggestion.diff }})
-            </li>
-        </ul>
+                <div class="form-field form-field--narrow">
+                    <label for="numberOfSuggestions">Nombre de suggestions</label>
+                    <input
+                        type="number"
+                        id="numberOfSuggestions"
+                        name="numberOfSuggestions"
+                        [(ngModel)]="numberOfSuggestions"
+                        min="1"
+                        required
+                    />
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="button" [disabled]="!wordForm.form.valid">
+                    Obtenir des suggestions
+                </button>
+                <p class="form-hint">Le moteur analyse chaque choix et met en avant ceux qui se rapprochent le plus de votre mot.</p>
+            </div>
+        </form>
+
+        <section *ngIf="suggestions.length > 0" class="word-suggestions__results">
+            <h2>Suggestions</h2>
+            <ul class="results-list">
+                <li class="results-list__item" *ngFor="let suggestion of suggestions">
+                    <span class="result-word">{{ suggestion.value }}</span>
+                    <span class="result-meta">Différences : {{ suggestion.diff }}</span>
+                </li>
+            </ul>
+        </section>
     </div>
-</div>
+</section>
